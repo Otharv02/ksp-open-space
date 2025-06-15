@@ -5,7 +5,7 @@ import pandas as pd
 # --- Streamlit Config ---
 st.set_page_config(page_title="KSP OPEN SPACE", layout="wide")
 st.sidebar.title("🛰 Kerbal Data Lab")
-selection = st.sidebar.radio("Navigation", ["🏠 Home", "📊 Datasets", "👨‍🔬 Community", "📥 Contact"])
+selection = st.sidebar.radio("Navigation", ["🏠 Home", "📊 Datasets", "👨‍🔬 Community", "🖼 Gallery", "📥 Contact"])
 
 # --- Global Styles ---
 st.markdown("""
@@ -18,17 +18,30 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- Dataset Descriptions & Metadata (can later be loaded from a JSON or CSV) ---
+# --- Dataset Descriptions ---
 dataset_metadata = {
-    "solid_vs_liquid.csv": {
-        "description": "Thrust/temperature comparison between solid and liquid rocket motors on test stand.",
+    "kerbnik_1_telemetry.csv": {
+        "description": "Telemetry of Kerbin satellite until battery failure at apoapsis.",
         "author": "Atharv Nawale"
     },
-    "kerbin_orbit_telemetry.csv": {
-        "description": "Telemetry of Kerbin satellite until battery failure at apoapsis.",
+    "BACC_thumper_static_test_data.csv": {
+        "description": "Static fire data for BACC 'Thumper' solid rocket booster.",
+        "author": "Atharv Nawale"
+    },
+    "RT_05_flea_static_test_data.csv": {
+        "description": "Performance test data for RT-05 'Flea' booster on launchpad.",
+        "author": "Atharv Nawale"
+    },
+    "RT_10_hammer_static_test_data.csv": {
+        "description": "Static test of the RT-10 'Hammer'.",
+        "author": "Atharv Nawale"
+    },
+    "S1_SRB_KD25k_Kickback__static_test_data.csv": {
+        "description": "Static test of the Kickback SRB (KD25k) with telemetry logging.",
         "author": "Atharv Nawale"
     }
 }
+
 
 # --- Helper: List Available Datasets ---
 def list_datasets():
@@ -37,15 +50,34 @@ def list_datasets():
     files = os.listdir("datasets")
     return [f for f in files if f.endswith(".csv")]
 
-# --- Pages ---
+# --- Home Page ---
 if selection == "🏠 Home":
-    st.title("🚀 KSP OPEN SPACE")
+    st.title("KSP OPEN SPACE")
     st.markdown("""
-        ### Welcome Commander
-        This is your gateway to Kerbal scientific data exchange.
-        📊 View shared telemetry datasets, or contribute your own to the community.
+        ### Welcome  
+        *"Research is what I'm doing when I don't know what I'm doing."*  
+        — *Werhner Von Kerman*  
+        
+        (*[**r/KerbalSpaceProgram**](https://www.reddit.com/r/KerbalSpaceProgram/s/anUFzd9AvS))
+        
+        ---
+
+        **KSP Open Space** is a community hub for spaceflight experiments, data sharing, and mission documentation within the Kerbal universe.
+
+        #### What you can do here:
+        - **View & download mission datasets**: Access telemetry from satellites, rockets, and experiments.
+        - **Explore community missions**: Discover Streamlit apps and projects from other Kerbonauts.
+        - **Submit ideas or data**: Share your CSV files or links to your own mission dashboards.
+        - **Learn from failures and triumphs**: From catastrophic launch explosions to flawless orbital insertions.
+
+        #### 📥 Want to contribute?
+        You can email your datasets or apps to be featured in our community:
+        **✉️ atharvnawale969@gmail.com**
+
+        Let’s keep exploring — for science, curiosity, and the occasional explosion.
     """)
 
+# --- Datasets Page ---
 elif selection == "📊 Datasets":
     st.title("📊 Datasets")
     dataset_list = list_datasets()
@@ -71,15 +103,15 @@ elif selection == "📊 Datasets":
     else:
         st.info("No datasets uploaded yet.")
 
+# --- Community Page ---
 elif selection == "👨‍🔬 Community":
-    st.title("👨‍🔬 Community Dataset Links")
+    st.title("👨‍🔬 Community Streamlit Links")
     st.markdown("Externally hosted datasets and Streamlit apps shared by the community.")
 
-    # Example community links
     community_links = [
-        {"title": "Minmus Spectral Analyzer", "url": "https://example.com/minmus", "author": "Atharv Nawale"},
-        {"title": "Kerbin Weather Archive", "url": "https://example.com/kerbin", "author": "Alex Kerman"},
-        {"title": "Eve Atmospheric Study", "url": "https://example.com/eve", "author": "Valentina K."}
+        {"title": "Minmus Spectral Analyzer", "url": "https://example.com/minmus", "author": "Atharv Nawale"}
+        # {"title": "Kerbin Weather Archive", "url": "https://example.com/kerbin", "author": "Alex Kerman"},
+        # {"title": "Eve Atmospheric Study", "url": "https://example.com/eve", "author": "Valentina K."}
     ]
 
     for item in community_links:
@@ -89,8 +121,31 @@ elif selection == "👨‍🔬 Community":
         with cols[1]:
             st.markdown(f"— by **{item['author']}**")
 
+# --- Gallery Page (View Only) ---
+# --- Gallery Page (View Only) ---
+elif selection == "🖼 Gallery":
+    st.title("🖼 Mission Image Gallery")
+
+    gallery_dir = "gallery"
+    os.makedirs(gallery_dir, exist_ok=True)
+
+
+    image_files = [img for img in os.listdir(gallery_dir) if img.lower().endswith((".png", ".jpg", ".jpeg"))]
+
+    if image_files:
+        st.subheader("🔭 Gallery")
+        cols = st.columns(3)
+        for i, img_file in enumerate(image_files):
+            img_path = os.path.join(gallery_dir, img_file)
+            with cols[i % 3]:
+                st.image(img_path, use_container_width=True)  # Updated
+    else:
+        st.info("No images in the gallery yet. Check back soon!")
+
+
+# --- Contact Page ---
 elif selection == "📥 Contact":
-    st.title("📥 Contact us for Dataset Uploads or Submissions")
+    st.title("📥 Contact us for Submissions")
     st.markdown("""
     ### 📧 Get in Touch
 
