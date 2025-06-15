@@ -2,7 +2,7 @@
 We launch satellites in KSP, collect telemetry (like thrust, altitude, temperature, etc.), and make that data publicly available.
 
 ## 🔗 Live Dashboard
-**[Open the Streamlit App](https://your-streamlit-app-link)**  
+**[Open the Streamlit App](https://ksp-open-space.streamlit.app/)**  
 
 Made for the curious.  
 Run missions. Share data. Learn space. 
