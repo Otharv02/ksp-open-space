@@ -21,24 +21,24 @@ st.markdown("""
 # --- Dataset Descriptions ---
 dataset_metadata = {
     "kerbnik_1_telemetry.csv": {
-        "description": "Telemetry of Kerbin satellite until battery failure at apoapsis.",
-        "author": "Atharv Nawale"
+        "description": "Telemetry of Kerbin satellite until battery failure at apoapsis.", 
+        "author":"Atharv"
     },
     "BACC_thumper_static_test_data.csv": {
         "description": "Static fire data for BACC 'Thumper' solid rocket booster.",
-        "author": "Atharv Nawale"
+        "author":"Atharv"
     },
     "RT_05_flea_static_test_data.csv": {
         "description": "Performance test data for RT-05 'Flea' booster on launchpad.",
-        "author": "Atharv Nawale"
+        "author":"Atharv"
     },
     "RT_10_hammer_static_test_data.csv": {
         "description": "Static test of the RT-10 'Hammer'.",
-        "author": "Atharv Nawale"
+        "author":"Atharv"
     },
     "S1_SRB_KD25k_Kickback__static_test_data.csv": {
         "description": "Static test of the Kickback SRB (KD25k) with telemetry logging.",
-        "author": "Atharv Nawale"
+        "author":"Atharv"
     }
 }
 
@@ -72,7 +72,7 @@ if selection == "🏠 Home":
 
         #### 📥 Want to contribute?
         You can email your datasets or apps to be featured in our community:
-        **✉️ atharvnawale969@gmail.com**
+        **✉️ [Mail](mailto:atharvnawale969@gmail.com)**  
 
         Let’s keep exploring — for science, curiosity, and the occasional explosion.
     """)
@@ -124,7 +124,7 @@ elif selection == "👨‍🔬 Community":
 # --- Gallery Page (View Only) ---
 # --- Gallery Page (View Only) ---
 elif selection == "🖼 Gallery":
-    st.title("🖼 Mission Image Gallery")
+    st.title("🖼 Mission Gallery")
 
     gallery_dir = "gallery"
     os.makedirs(gallery_dir, exist_ok=True)
@@ -156,7 +156,7 @@ elif selection == "📥 Contact":
 
     Please send an email to:
 
-    **✉️ [atharvnawale969@gmail.com](mailto:atharvnawale969@gmail.com)**  
+    **✉️ [Mail](mailto:atharvnawale969@gmail.com)**  
 
     Include:
     - Your name
