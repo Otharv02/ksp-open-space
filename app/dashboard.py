@@ -2,6 +2,9 @@ import streamlit as st
 import os
 import pandas as pd
 
+from dataset_meta import get_dataset_metadata
+from community_list import get_community_list
+
 # --- Streamlit Config ---
 st.set_page_config(page_title="KSP OPEN SPACE", layout="wide")
 st.sidebar.title("🛰 Kerbal Data Lab")
@@ -19,28 +22,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- Dataset Descriptions ---
-dataset_metadata = {
-    "kerbnik_1_telemetry.csv": {
-        "description": "Telemetry of Kerbin satellite until battery failure at apoapsis.", 
-        "author":"Atharv"
-    },
-    "BACC_thumper_static_test_data.csv": {
-        "description": "Static fire data for BACC 'Thumper' solid rocket booster.",
-        "author":"Atharv"
-    },
-    "RT_05_flea_static_test_data.csv": {
-        "description": "Performance test data for RT-05 'Flea' booster on launchpad.",
-        "author":"Atharv"
-    },
-    "RT_10_hammer_static_test_data.csv": {
-        "description": "Static test of the RT-10 'Hammer'.",
-        "author":"Atharv"
-    },
-    "S1_SRB_KD25k_Kickback__static_test_data.csv": {
-        "description": "Static test of the Kickback SRB (KD25k) with telemetry logging.",
-        "author":"Atharv"
-    }
-}
+dataset_metadata = get_dataset_metadata() # problem was the variable name
 
 
 # --- Helper: List Available Datasets ---
@@ -108,11 +90,10 @@ elif selection == "👨‍🔬 Community":
     st.title("👨‍🔬 Community Streamlit Links")
     st.markdown("Externally hosted datasets and Streamlit apps shared by the community.")
 
-    community_links = [
-        {"title": "Kerbnik-1 Mission Telemetry Analysis", "url": "https://kerbnik-1.streamlit.app/", "author": "Soham Kokate"}
-        # {"title": "Kerbin Weather Archive", "url": "https://example.com/kerbin", "author": "Alex Kerman"},
-        # {"title": "Eve Atmospheric Study", "url": "https://example.com/eve", "author": "Valentina K."}
-    ]
+
+    # to get community send info 
+    community_links = get_community_list()
+    
 
     for item in community_links:
         cols = st.columns([3, 1])
